@@ -1,9 +1,268 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            background: white;
+            overflow: hidden;
+        }
+
+        .left-side {
+            width: 50%;
+            background: linear-gradient(135deg, #5483B3 0%, #6a9ac4 100%);
+            padding: 60px 40px;
+            color: white;
+            position: relative;
+        }
+
+        .icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .icon svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
+        .left-side h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .left-side .subtitle {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .left-side .description {
+            font-size: 14px;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        .right-side {
+            width: 50%;
+            padding: 60px 50px;
+            position: relative;
+        }
+
+        .login-header h2 {
+            font-size: 32px;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .login-header p {
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            fill: #9ca3af;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 45px;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 14px;
+            background: #f9fafb;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #5483B3;
+            background: white;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 25px;
+        }
+
+        .forgot-password a {
+            color: #5483B3;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #5483B3 0%, #4a7199 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #4a7199 0%, #3d5f80 100%);
+        }
+
+        .signup-link {
+            text-align: center;
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .signup-link a {
+            color: #5483B3;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 11px;
+            color: #9ca3af;
+        }
+    </style>
 </head>
 <body>
-  <h1>Login Page</h1>
+    <div class="container">
+      
+        <div class="left-side">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                </svg>
+            </div>
+            <h1>Hello!</h1>
+            <div class="subtitle">Welcome Student</div>
+            <div class="description">
+                Access your courses, assignments, and grades in one place.
+            </div>
+        </div>
+
+        
+        <div class="right-side">
+            
+            <div class="login-header">
+                <h2>Login</h2>
+                <p>Please enter your credentials to access your portal</p>
+            </div>
+
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Email</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <input type="email" id="email" placeholder="Email" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                        <input type="password" id="password" placeholder="Password" required>
+                    </div>
+                </div>
+
+                <div class="forgot-password">
+                    <a href="#">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="login-btn">Login</button>
+
+                <div class="signup-link">
+                    New here? <a href="signup.html">Sign Up</a>
+                </div>
+
+                <div class="footer">
+                    © 2024 Educational Platform. All rights reserved. Secure Login
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            console.log('Login attempt:', { email, password });
+            alert('Login functionality would be implemented here');
+          
+        }
+
+        function closeModal() {
+            console.log('Close button clicked');
+            
+        }
+    </script>
 </body>
 </html>
