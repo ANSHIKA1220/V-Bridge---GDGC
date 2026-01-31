@@ -301,9 +301,20 @@
                 return;
             }
             
-            console.log('Signup attempt:', { email, password });
-            alert('Sign up functionality would be implemented here');
-           
+           // store email in browser
+localStorage.setItem("userEmail", email);
+
+// store password in browser
+localStorage.setItem("userPassword", password);
+
+// optional: store username from email
+localStorage.setItem("userName", email.split("@")[0]);
+
+alert("Signup successful! Please login.");
+
+// redirect to login page
+window.location.href = "login.html";
+
         }
 
         function closeModal() {
