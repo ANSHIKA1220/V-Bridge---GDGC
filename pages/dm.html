@@ -1,1 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DM </title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          primary: "#3B82F6",
+          "background-light": "#F8FAFC",
+          "background-dark": "#0F172A",
+        },
+        fontFamily: {
+          display: ["Arial", "sans-serif"],
+        },
+        borderRadius: {
+          DEFAULT: "0.75rem",
+        },
+      },
+    },
+  };
+</script>
+<style type="text/tailwindcss">
+  body { font-family: 'Inter', sans-serif; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+  .dark ::-webkit-scrollbar-thumb { background: #334155; }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 h-screen flex overflow-hidden transition-colors duration-200">
 
+<!-- Left Sidebar Navigation -->
+<nav class="w-20 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col items-center py-6 shrink-0 z-20">
+  <div class="bg-primary p-2 rounded-xl text-white mb-10 shadow-lg shadow-blue-500/20">
+    <span class="material-symbols-outlined text-2xl block">school</span>
+  </div>
+  <div class="flex flex-col gap-8 flex-1">
+    <a class="p-3 rounded-xl text-slate-400 hover:text-primary hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center justify-center group relative" href="#">
+      <span class="material-symbols-outlined">home</span>
+      <span class="absolute left-full ml-4 px-2 py-1 bg-slate-800 text-white text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50">Home</span>
+    </a>
+    <a class="p-3 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-primary flex items-center justify-center group relative" href="#">
+      <span class="material-symbols-outlined">chat_bubble</span>
+      <span class="absolute left-full ml-4 px-2 py-1 bg-slate-800 text-white text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50">DMs</span>
+    </a>
+    <a class="p-3 rounded-xl text-slate-400 hover:text-primary hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center justify-center group relative" href="#">
+      <span class="material-symbols-outlined">explore</span>
+      <span class="absolute left-full ml-4 px-2 py-1 bg-slate-800 text-white text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50">Explore</span>
+    </a>
+    <a class="p-3 rounded-xl text-slate-400 hover:text-primary hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center justify-center group relative" href="#">
+      <span class="material-symbols-outlined">person</span>
+      <span class="absolute left-full ml-4 px-2 py-1 bg-slate-800 text-white text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50">Profile</span>
+    </a>
+  </div>
+  <div class="flex flex-col gap-6 items-center">
+    <button id="darkModeToggle" class="p-3 text-slate-400 hover:text-primary transition-colors">
+      <span class="material-symbols-outlined">dark_mode</span>
+    </button>
+    <div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 p-0.5 border border-slate-200 dark:border-slate-800">
+      <img alt="Alex Johnson Profile" class="h-full w-full rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNMJHITvFDtpABr6FJ1SRH8WTYvRuc4Wg7EDI2Xmw29roT1HSDjbBEo56I6PMcAuzLAfqKcl97gqHY8HcaWTaO5WI_KXIVvU1eIwawidZYKQGNqImsW5m_GypbXknDBrihMbt4dtVgViEi6i-wZdRY9pvb8txUg68QWt9PZewmgcKafi15n5vro2TWuWqSmDz55mKNEKZPZwlqSrO2X-zj2qU9qDGxb83AaCeVDNpKHqik_kif1aViJ-AwnaAEDJ6KqYiNWTGwUIfk"/>
+    </div>
+  </div>
+</nav>
+
+<!-- LAYER 1: Chat List -->
+<div id="chatListLayer" class="flex-1 flex flex-col bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 transform transition-transform duration-300 translate-x-0">
+  <div class="p-6">
+    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Messages</p>
+    <h2 class="text-2xl font-bold mb-6"><span id="unreadCount">06</span> Unread</h2>
+    <div class="relative">
+      <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-sm">search</span>
+      <input id="searchInput" class="w-full bg-slate-100 dark:bg-slate-800/50 border-none rounded-xl py-2.5 pl-10 pr-4 text-sm placeholder-slate-400 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search chats..." type="text"/>
+    </div>
+  </div>
+  
+  <div class="flex-1 overflow-y-auto px-3 py-4">
+    <div class="flex items-center justify-between px-3 mb-4 relative">
+      <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Recent Chats</span>
+      <button id="chatOptionsButton" class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">more_horiz</span></button>
+      
+      <!-- Chat Options Dropdown Menu -->
+      <div id="chatOptionsMenu" class="hidden absolute right-0 top-full mt-2 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-200 dark:border-slate-700 py-2 w-48 z-50">
+        <button id="newChatBtn" class="w-full px-4 py-2.5 text-left hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-3 text-sm">
+          <span class="material-symbols-outlined text-primary text-lg">add_circle</span>
+          <span>New Chat</span>
+        </button>
+        <button id="markAllReadBtn" class="w-full px-4 py-2.5 text-left hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-3 text-sm">
+          <span class="material-symbols-outlined text-primary text-lg">done_all</span>
+          <span>Mark All as Read</span>
+        </button>
+        <div class="h-px bg-slate-200 dark:bg-slate-700 my-1"></div>
+        <button id="settingsBtn" class="w-full px-4 py-2.5 text-left hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-3 text-sm">
+          <span class="material-symbols-outlined text-primary text-lg">settings</span>
+          <span>Settings</span>
+        </button>
+      </div>
+    </div>
+    <div id="chatList"></div>
+  </div>
+</div>
+
+<!-- Context Menu for Chat Items -->
+<div id="chatContextMenu" class="hidden fixed bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 py-2 w-56 z-[60]">
+  <button id="contextMarkUnread" class="w-full px-4 py-2.5 text-left hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-3 text-sm">
+    <span class="material-symbols-outlined text-blue-600 text-lg">mark_email_unread</span>
+    <span>Mark as Unread</span>
+  </button>
+  <button id="contextPinChat" class="w-full px-4 py-2.5 text-left hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-3 text-sm">
+    <span class="material-symbols-outlined text-blue-600 text-lg">push_pin</span>
+    <span>Pin Chat</span>
+  </button>
+  <button id="contextArchive" class="w-full px-4 py-2.5 text-left hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-3 text-sm">
+    <span class="material-symbols-outlined text-blue-600 text-lg">archive</span>
+    <span>Archive Chat</span>
+  </button>
+  <div class="h-px bg-slate-200 dark:bg-slate-700 my-1"></div>
+  <button id="contextClearChat" class="w-full px-4 py-2.5 text-left hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors flex items-center gap-3 text-sm text-red-600">
+    <span class="material-symbols-outlined text-lg">delete_sweep</span>
+    <span>Clear Chat</span>
+  </button>
+  <button id="contextDeleteChat" class="w-full px-4 py-2.5 text-left hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors flex items-center gap-3 text-sm text-red-600">
+    <span class="material-symbols-outlined text-lg">delete</span>
+    <span>Delete Chat</span>
+  </button>
+</div>
+
+<!-- LAYER 2: Chat View -->
+<div id="chatViewLayer" class="flex flex-col bg-background-light dark:bg-background-dark absolute inset-0 left-20 transform transition-transform duration-300 translate-x-full">
+  <!-- Chat Header -->
+  <div class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-6 py-3 flex items-center justify-between shrink-0">
+    <div class="flex items-center gap-3">
+      <button id="backToChatList" class="p-2 -ml-2 text-slate-400 hover:text-primary transition-colors">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </button>
+      <div class="relative">
+        <img id="activeChatAvatar" alt="" class="h-10 w-10 rounded-full" src=""/>
+        <div id="activeChatStatus" class="absolute bottom-0 right-0 h-3 w-3 bg-green-500 rounded-full border-2 border-white dark:border-slate-900"></div>
+      </div>
+      <div>
+        <h3 id="activeChatName" class="font-semibold text-sm leading-none mb-1"></h3>
+        <p id="activeChatRole" class="text-xs text-slate-400"></p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="p-2 text-slate-400 hover:text-primary hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-all">
+        <span class="material-symbols-outlined">videocam</span>
+      </button>
+      <button class="p-2 text-slate-400 hover:text-primary hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-all">
+        <span class="material-symbols-outlined">call</span>
+      </button>
+      <button id="infoButton" class="p-2 text-slate-400 hover:text-primary hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-all">
+        <span class="material-symbols-outlined">info</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Messages Container -->
+  <div id="messagesContainer" class="flex-1 overflow-y-auto px-6 py-6 space-y-4"></div>
+
+  <!-- Input Area -->
+  <div class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-6 py-4 shrink-0">
+    <div class="flex items-center gap-2">
+      <button id="attachButton" class="p-2 text-slate-400 hover:text-primary transition-all">
+        <span class="material-symbols-outlined text-2xl">add_circle</span>
+      </button>
+      
+      <input id="messageInput" class="flex-1 bg-slate-100 dark:bg-slate-800/50 border-none rounded-full py-3 px-5 text-sm placeholder-slate-400 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Type a message..."/>
+      
+      <button id="emojiButton" class="p-2 text-slate-400 hover:text-primary transition-all relative">
+        <span class="material-symbols-outlined text-2xl">sentiment_satisfied</span>
+        <!-- Emoji Picker -->
+        <div id="emojiPicker" class="hidden absolute bottom-full right-0 mb-2 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-200 dark:border-slate-700 p-3 w-64 z-50">
+          <div id="emojiGrid" class="grid grid-cols-8 gap-1 max-h-48 overflow-y-auto"></div>
+        </div>
+      </button>
+      
+      <button id="sendButton" class="p-3 bg-primary text-white rounded-full hover:bg-blue-600 transition-all shadow-lg shadow-blue-500/20">
+        <span class="material-symbols-outlined">send</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- LAYER 3: Profile Panel (slides in from right, alongside chat) -->
+<div id="profileLayer" class="w-96 flex flex-col bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 absolute top-0 bottom-0 right-0 transform transition-transform duration-300 translate-x-full z-10">
+  <div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+    <button id="backToChat" class="p-2 -ml-2 text-slate-400 hover:text-primary transition-colors">
+      <span class="material-symbols-outlined">arrow_back</span>
+    </button>
+    <h3 class="font-semibold">Contact Info</h3>
+    <button id="closeProfile" class="p-2 -mr-2 text-slate-400 hover:text-primary transition-colors">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </div>
+  <div class="flex-1 overflow-y-auto">
+    <div class="p-6 text-center border-b border-slate-200 dark:border-slate-800">
+      <div class="relative inline-block mb-4">
+        <img id="profileAvatar" alt="" class="h-24 w-24 rounded-full mx-auto" src=""/>
+        <div id="profileStatus" class="absolute bottom-2 right-2 h-5 w-5 bg-green-500 rounded-full border-4 border-white dark:border-slate-900"></div>
+      </div>
+      <h2 id="profileName" class="text-xl font-bold mb-1"></h2>
+      <p id="profileRole" class="text-sm text-slate-400 mb-4"></p>
+      <div class="flex gap-2 justify-center">
+        <button class="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+          <span class="material-symbols-outlined text-primary">call</span>
+        </button>
+        <button class="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+          <span class="material-symbols-outlined text-primary">videocam</span>
+        </button>
+        <button class="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+          <span class="material-symbols-outlined text-primary">mail</span>
+        </button>
+      </div>
+    </div>
+    <div class="p-6 space-y-6">
+      <div>
+        <p class="text-xs text-slate-400 uppercase tracking-wider mb-3">About</p>
+        <p id="profileBio" class="text-sm"></p>
+      </div>
+      
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <p class="text-xs text-slate-400 uppercase tracking-wider">Media, Links, and Docs</p>
+          <button class="text-xs text-primary hover:underline">See all</button>
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <div class="aspect-square bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg"></div>
+          <div class="aspect-square bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg"></div>
+          <div class="aspect-square bg-gradient-to-br from-pink-400 to-pink-600 rounded-lg"></div>
+        </div>
+      </div>
+
+      <div class="border-t border-slate-200 dark:border-slate-800 pt-4">
+        <button class="w-full px-4 py-3 text-left hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors flex items-center gap-3">
+          <span class="material-symbols-outlined text-slate-600 dark:text-slate-400">notifications</span>
+          <span class="text-sm">Mute notifications</span>
+        </button>
+        <button class="w-full px-4 py-3 text-left hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors flex items-center gap-3">
+          <span class="material-symbols-outlined text-slate-600 dark:text-slate-400">wallpaper</span>
+          <span class="text-sm">Wallpaper</span>
+        </button>
+        <button class="w-full px-4 py-3 text-left hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors flex items-center gap-3">
+          <span class="material-symbols-outlined text-slate-600 dark:text-slate-400">lock</span>
+          <span class="text-sm">Encryption</span>
+        </button>
+      </div>
+
+      <div class="border-t border-slate-200 dark:border-slate-800 pt-4">
+        <button class="w-full px-4 py-3 text-left hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors flex items-center gap-3 text-red-600">
+          <span class="material-symbols-outlined">block</span>
+          <span class="text-sm">Block Contact</span>
+        </button>
+        <button class="w-full px-4 py-3 text-left hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors flex items-center gap-3 text-red-600">
+          <span class="material-symbols-outlined">flag</span>
+          <span class="text-sm">Report Contact</span>
+        </button>
+        <button class="w-full px-4 py-3 text-left hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors flex items-center gap-3 text-red-600">
+          <span class="material-symbols-outlined">delete</span>
+          <span class="text-sm">Delete Chat</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Navigation State Management
+let navigationStack = [];
+
+// Sample chat data
+let allChats = [
+  {
+    id: 1,
+    name: "Sarah Wilson",
+    role: "Lead Designer",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
+    lastMessage: "Thanks! I'll review the designs",
+    time: "2m",
+    unread: 3,
+    online: true,
+    bio: "Passionate about creating beautiful user experiences. Coffee enthusiast ☕",
+    messages: [
+      { id: 1, text: "Hey! How's the project coming along?", time: "10:30 AM", sender: "them" },
+      { id: 2, text: "Pretty good! Just finished the mockups", time: "10:32 AM", sender: "me" },
+      { id: 3, text: "That's great! Can you send them over?", time: "10:33 AM", sender: "them" },
+      { id: 4, text: "Sure, uploading now...", time: "10:35 AM", sender: "me" },
+      { id: 5, text: "Thanks! I'll review the designs", time: "10:36 AM", sender: "them" }
+    ]
+  },
+  {
+    id: 2,
+    name: "Mike Chen",
+    role: "Frontend Developer",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
+    lastMessage: "The new component looks amazing!",
+    time: "1h",
+    unread: 1,
+    online: true,
+    bio: "Full-stack developer who loves React and Node.js. Always learning something new.",
+    messages: [
+      { id: 1, text: "Did you see the new button component?", time: "9:15 AM", sender: "me" },
+      { id: 2, text: "The new component looks amazing!", time: "9:20 AM", sender: "them" }
+    ]
+  },
+  {
+    id: 3,
+    name: "Emma Rodriguez",
+    role: "Product Manager",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150",
+    lastMessage: "Let's schedule a meeting tomorrow",
+    time: "3h",
+    unread: 0,
+    online: false,
+    bio: "Product manager focused on user-centric solutions. Dog lover 🐕",
+    messages: [
+      { id: 1, text: "We need to discuss the roadmap", time: "8:00 AM", sender: "them" },
+      { id: 2, text: "Let's schedule a meeting tomorrow", time: "8:05 AM", sender: "them" }
+    ]
+  },
+  {
+    id: 4,
+    name: "Alex Thompson",
+    role: "UX Researcher",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150",
+    lastMessage: "User testing went really well!",
+    time: "5h",
+    unread: 2,
+    online: true,
+    bio: "UX researcher passionate about understanding user behavior and improving experiences.",
+    messages: [
+      { id: 1, text: "How did the user testing go?", time: "7:00 AM", sender: "me" },
+      { id: 2, text: "User testing went really well!", time: "7:30 AM", sender: "them" }
+    ]
+  },
+  {
+    id: 5,
+    name: "Jessica Park",
+    role: "Backend Developer",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
+    lastMessage: "API endpoints are ready for testing",
+    time: "1d",
+    unread: 0,
+    online: false,
+    bio: "Backend engineer specializing in scalable systems. Marathon runner 🏃‍♀️",
+    messages: [
+      { id: 1, text: "When will the API be ready?", time: "Yesterday", sender: "me" },
+      { id: 2, text: "API endpoints are ready for testing", time: "Yesterday", sender: "them" }
+    ]
+  },
+  {
+    id: 6,
+    name: "David Kim",
+    role: "DevOps Engineer",
+    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150",
+    lastMessage: "Deployment successful ✅",
+    time: "2d",
+    unread: 0,
+    online: true,
+    bio: "DevOps engineer ensuring smooth deployments. Guitar player in free time 🎸",
+    messages: [
+      { id: 1, text: "Can you deploy the latest build?", time: "2 days ago", sender: "me" },
+      { id: 2, text: "Deployment successful ✅", time: "2 days ago", sender: "them" }
+    ]
+  }
+];
+
+let activeChat = allChats[0];
+let filteredChats = [...allChats];
+
+// DOM Elements
+const chatList = document.getElementById('chatList');
+const chatListLayer = document.getElementById('chatListLayer');
+const chatViewLayer = document.getElementById('chatViewLayer');
+const profileLayer = document.getElementById('profileLayer');
+const messagesContainer = document.getElementById('messagesContainer');
+const messageInput = document.getElementById('messageInput');
+const sendButton = document.getElementById('sendButton');
+const searchInput = document.getElementById('searchInput');
+const backToChatList = document.getElementById('backToChatList');
+const infoButton = document.getElementById('infoButton');
+const backToChat = document.getElementById('backToChat');
+
+// Dark mode toggle
+const darkModeToggle = document.getElementById('darkModeToggle');
+darkModeToggle?.addEventListener('click', () => {
+  document.documentElement.classList.toggle('dark');
+});
+
+// Layer navigation functions
+function showChatList() {
+  chatListLayer.classList.remove('-translate-x-full');
+  chatListLayer.classList.add('translate-x-0');
+  chatViewLayer.classList.remove('translate-x-0');
+  chatViewLayer.classList.add('translate-x-full');
+  profileLayer.classList.remove('translate-x-0');
+  profileLayer.classList.add('translate-x-full');
+}
+
+function showChatView() {
+  chatListLayer.classList.remove('translate-x-0');
+  chatListLayer.classList.add('-translate-x-full');
+  chatViewLayer.classList.remove('translate-x-full');
+  chatViewLayer.classList.add('translate-x-0');
+  profileLayer.classList.remove('translate-x-0');
+  profileLayer.classList.add('translate-x-full');
+}
+
+function showProfile() {
+  // Keep chat view visible, just slide in profile from right
+  chatListLayer.classList.remove('translate-x-0');
+  chatListLayer.classList.add('-translate-x-full');
+  chatViewLayer.classList.remove('translate-x-full');
+  chatViewLayer.classList.add('translate-x-0');
+  profileLayer.classList.remove('translate-x-full');
+  profileLayer.classList.add('translate-x-0');
+}
+
+function closeProfile() {
+  // Just hide profile, keep chat view visible
+  profileLayer.classList.remove('translate-x-0');
+  profileLayer.classList.add('translate-x-full');
+}
+
+// Render functions
+function renderChatList() {
+  chatList.innerHTML = filteredChats.map(chat => `
+    <button data-chat-id="${chat.id}" class="chat-item w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all ${chat.id === activeChat.id ? 'bg-blue-50 dark:bg-blue-900/30' : ''}">
+      <div class="relative shrink-0">
+        <img alt="${chat.name}" class="h-12 w-12 rounded-full object-cover" src="${chat.avatar}"/>
+        <div class="absolute bottom-0 right-0 h-3 w-3 ${chat.online ? 'bg-green-500' : 'bg-slate-300'} rounded-full border-2 border-white dark:border-slate-900"></div>
+      </div>
+      <div class="flex-1 min-w-0 text-left">
+        <div class="flex items-center justify-between mb-1">
+          <h4 class="font-semibold text-sm truncate">${chat.name}</h4>
+          <span class="text-xs text-slate-400 shrink-0 ml-2">${chat.time}</span>
+        </div>
+        <p class="text-xs text-slate-400 truncate">${chat.lastMessage}</p>
+      </div>
+      ${chat.unread > 0 ? `<div class="shrink-0 h-5 w-5 bg-primary text-white text-[10px] font-bold rounded-full flex items-center justify-center">${chat.unread}</div>` : ''}
+    </button>
+  `).join('');
+
+  // Add click handlers
+  document.querySelectorAll('.chat-item').forEach(item => {
+    const chatId = parseInt(item.dataset.chatId);
+    
+    // Regular click
+    item.addEventListener('click', (e) => {
+      // Don't open chat if context menu is showing
+      if (chatContextMenu.classList.contains('hidden')) {
+        const chat = allChats.find(c => c.id === chatId);
+        if (chat) {
+          activeChat = chat;
+          chat.unread = 0;
+          renderChatList();
+          renderActiveChat();
+          renderMessages();
+          updateUnreadCount();
+          showChatView();
+          pushNavigationState('chat-view');
+        }
+      }
+    });
+
+    // Right-click context menu
+    item.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      showContextMenu(e.clientX, e.clientY, chatId);
+    });
+
+    // Long-press for mobile
+    let longPressTimer;
+    item.addEventListener('touchstart', (e) => {
+      longPressTimer = setTimeout(() => {
+        const touch = e.touches[0];
+        showContextMenu(touch.clientX, touch.clientY, chatId);
+      }, 500);
+    });
+
+    item.addEventListener('touchend', () => {
+      clearTimeout(longPressTimer);
+    });
+
+    item.addEventListener('touchmove', () => {
+      clearTimeout(longPressTimer);
+    });
+  });
+}
+
+function renderActiveChat() {
+  document.getElementById('activeChatAvatar').src = activeChat.avatar;
+  document.getElementById('activeChatName').textContent = activeChat.name;
+  document.getElementById('activeChatRole').textContent = activeChat.role;
+  document.getElementById('activeChatStatus').className = `absolute bottom-0 right-0 h-3 w-3 ${activeChat.online ? 'bg-green-500' : 'bg-slate-300'} rounded-full border-2 border-white dark:border-slate-900`;
+  updateProfilePanel();
+}
+
+function updateProfilePanel() {
+  document.getElementById('profileAvatar').src = activeChat.avatar;
+  document.getElementById('profileName').textContent = activeChat.name;
+  document.getElementById('profileRole').textContent = activeChat.role;
+  document.getElementById('profileBio').textContent = activeChat.bio;
+  document.getElementById('profileStatus').className = `absolute bottom-2 right-2 h-5 w-5 ${activeChat.online ? 'bg-green-500' : 'bg-slate-300'} rounded-full border-4 border-white dark:border-slate-900`;
+}
+
+function renderMessages() {
+  messagesContainer.innerHTML = activeChat.messages.map(msg => `
+    <div class="flex ${msg.sender === 'me' ? 'justify-end' : 'justify-start'}">
+      <div class="${msg.sender === 'me' ? 'bg-primary text-white' : 'bg-white dark:bg-slate-800'} rounded-2xl px-4 py-2.5 max-w-[70%] shadow-sm">
+        <p class="text-sm">${msg.text}</p>
+        <span class="text-[10px] ${msg.sender === 'me' ? 'text-blue-100' : 'text-slate-400'} mt-1 block">${msg.time}</span>
+      </div>
+    </div>
+  `).join('');
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function updateUnreadCount() {
+  const total = allChats.reduce((sum, chat) => sum + chat.unread, 0);
+  document.getElementById('unreadCount').textContent = total.toString().padStart(2, '0');
+}
+
+// Search functionality
+searchInput.addEventListener('input', (e) => {
+  const query = e.target.value.toLowerCase();
+  filteredChats = allChats.filter(chat => 
+    chat.name.toLowerCase().includes(query) || 
+    chat.lastMessage.toLowerCase().includes(query)
+  );
+  renderChatList();
+});
+
+// Send message
+function sendMessage() {
+  const text = messageInput.value.trim();
+  if (!text) return;
+  
+  const newMessage = {
+    id: activeChat.messages.length + 1,
+    text,
+    time: new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }),
+    sender: 'me'
+  };
+  
+  activeChat.messages.push(newMessage);
+  activeChat.lastMessage = text;
+  activeChat.time = 'Now';
+  
+  messageInput.value = '';
+  renderMessages();
+  renderChatList();
+}
+
+sendButton.addEventListener('click', sendMessage);
+messageInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+});
+
+// Navigation controls
+backToChatList?.addEventListener('click', () => {
+  showChatList();
+  if (navigationStack.length > 0 && navigationStack[navigationStack.length - 1] === 'chat-view') {
+    navigationStack.pop();
+  }
+});
+
+infoButton?.addEventListener('click', () => {
+  showProfile();
+  pushNavigationState('profile-panel');
+});
+
+backToChat?.addEventListener('click', () => {
+  closeProfile();
+  if (navigationStack.length > 0 && navigationStack[navigationStack.length - 1] === 'profile-panel') {
+    navigationStack.pop();
+  }
+});
+
+// Close profile button (same as back)
+const closeProfileBtn = document.getElementById('closeProfile');
+closeProfileBtn?.addEventListener('click', () => {
+  closeProfile();
+  if (navigationStack.length > 0 && navigationStack[navigationStack.length - 1] === 'profile-panel') {
+    navigationStack.pop();
+  }
+});
+
+// Emoji functionality
+const emojiButton = document.getElementById('emojiButton');
+const emojiPicker = document.getElementById('emojiPicker');
+const emojiGrid = document.getElementById('emojiGrid');
+
+// Common emojis
+const emojis = ['😊', '😂', '❤️', '👍', '🎉', '🔥', '✨', '💯', '🙌', '👏', '😍', '🤔', '😅', '🥳', '💪', '🌟'];
+emojis.forEach(emoji => {
+  const btn = document.createElement('button');
+  btn.textContent = emoji;
+  btn.className = 'text-xl hover:bg-slate-100 dark:hover:bg-slate-700 rounded p-1 transition-colors';
+  btn.onclick = () => {
+    messageInput.value += emoji;
+    messageInput.focus();
+  };
+  emojiGrid.appendChild(btn);
+});
+
+emojiButton.addEventListener('click', (e) => {
+  e.stopPropagation();
+  emojiPicker.classList.toggle('hidden');
+});
+
+// Prevent emoji picker from closing when clicking inside
+emojiPicker.addEventListener('click', (e) => e.stopPropagation());
+
+// Close menus when clicking outside
+document.addEventListener('click', () => {
+  emojiPicker.classList.add('hidden');
+  document.getElementById('chatOptionsMenu').classList.add('hidden');
+  chatContextMenu.classList.add('hidden');
+});
+
+// Context Menu functionality
+const chatContextMenu = document.getElementById('chatContextMenu');
+let contextMenuTargetId = null;
+
+function showContextMenu(x, y, chatId) {
+  contextMenuTargetId = chatId;
+  chatContextMenu.classList.remove('hidden');
+  
+  // Position the menu
+  chatContextMenu.style.left = `${x}px`;
+  chatContextMenu.style.top = `${y}px`;
+  
+  // Adjust if menu goes off screen
+  const menuRect = chatContextMenu.getBoundingClientRect();
+  const windowWidth = window.innerWidth;
+  const windowHeight = window.innerHeight;
+  
+  if (menuRect.right > windowWidth) {
+    chatContextMenu.style.left = `${windowWidth - menuRect.width - 10}px`;
+  }
+  if (menuRect.bottom > windowHeight) {
+    chatContextMenu.style.top = `${windowHeight - menuRect.height - 10}px`;
+  }
+}
+
+// Context menu actions
+document.getElementById('contextMarkUnread')?.addEventListener('click', () => {
+  const chat = allChats.find(c => c.id === contextMenuTargetId);
+  if (chat) {
+    chat.unread = chat.unread > 0 ? 0 : 1;
+    renderChatList();
+    updateUnreadCount();
+  }
+  chatContextMenu.classList.add('hidden');
+});
+
+document.getElementById('contextPinChat')?.addEventListener('click', () => {
+  alert('Pin chat functionality would be implemented here');
+  chatContextMenu.classList.add('hidden');
+});
+
+document.getElementById('contextArchive')?.addEventListener('click', () => {
+  alert('Archive chat functionality would be implemented here');
+  chatContextMenu.classList.add('hidden');
+});
+
+document.getElementById('contextClearChat')?.addEventListener('click', () => {
+  const chat = allChats.find(c => c.id === contextMenuTargetId);
+  if (chat && confirm(`Clear all messages with ${chat.name}?`)) {
+    chat.messages = [];
+    chat.lastMessage = 'No messages yet';
+    renderChatList();
+    if (activeChat.id === chat.id) {
+      renderMessages();
+    }
+  }
+  chatContextMenu.classList.add('hidden');
+});
+
+document.getElementById('contextDeleteChat')?.addEventListener('click', () => {
+  const chat = allChats.find(c => c.id === contextMenuTargetId);
+  if (chat && confirm(`Delete chat with ${chat.name}?`)) {
+    allChats = allChats.filter(c => c.id !== contextMenuTargetId);
+    filteredChats = [...allChats];
+    if (activeChat.id === contextMenuTargetId && allChats.length > 0) {
+      activeChat = allChats[0];
+      renderActiveChat();
+      renderMessages();
+    }
+    renderChatList();
+    updateUnreadCount();
+  }
+  chatContextMenu.classList.add('hidden');
+});
+
+chatContextMenu.addEventListener('click', (e) => e.stopPropagation());
+
+// Chat Options Menu
+const chatOptionsButton = document.getElementById('chatOptionsButton');
+const chatOptionsMenu = document.getElementById('chatOptionsMenu');
+const newChatBtn = document.getElementById('newChatBtn');
+const markAllReadBtn = document.getElementById('markAllReadBtn');
+const settingsBtn = document.getElementById('settingsBtn');
+
+chatOptionsButton.addEventListener('click', (e) => {
+  e.stopPropagation();
+  chatOptionsMenu.classList.toggle('hidden');
+  emojiPicker.classList.add('hidden');
+});
+
+chatOptionsMenu.addEventListener('click', (e) => e.stopPropagation());
+
+newChatBtn.addEventListener('click', () => {
+  const newChatId = allChats.length > 0 ? Math.max(...allChats.map(c => c.id)) + 1 : 1;
+  const newChat = {
+    id: newChatId,
+    name: "New Chat",
+    role: "User",
+    avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuBNMJHITvFDtpABr6FJ1SRH8WTYvRuc4Wg7EDI2Xmw29roT1HSDjbBEo56I6PMcAuzLAfqKcl97gqHY8HcaWTaO5WI_KXIVvU1eIwawidZYKQGNqImsW5m_GypbXknDBrihMbt4dtVgViEi6i-wZdRY9pvb8txUg68QWt9PZewmgcKafi15n5vro2TWuWqSmDz55mKNEKZPZwlqSrO2X-zj2qU9qDGxb83AaCeVDNpKHqik_kif1aViJ-AwnaAEDJ6KqYiNWTGwUIfk",
+    lastMessage: "Start a new conversation...",
+    time: "Now",
+    unread: 0,
+    online: true,
+    bio: "New conversation",
+    messages: []
+  };
+  allChats.unshift(newChat);
+  activeChat = newChat;
+  renderChatList();
+  renderActiveChat();
+  renderMessages();
+  chatOptionsMenu.classList.add('hidden');
+  showChatView();
+  pushNavigationState('chat-view');
+});
+
+markAllReadBtn.addEventListener('click', () => {
+  allChats.forEach(chat => chat.unread = 0);
+  renderChatList();
+  updateUnreadCount();
+  chatOptionsMenu.classList.add('hidden');
+});
+
+settingsBtn.addEventListener('click', () => {
+  alert('Settings panel would open here. This is a demo placeholder.');
+  chatOptionsMenu.classList.add('hidden');
+});
+
+// Navigation state management
+function pushNavigationState(state) {
+  navigationStack.push(state);
+  history.pushState({ navState: state }, '', window.location.href);
+}
+
+function handleBackNavigation() {
+  if (navigationStack.length === 0) return;
+  
+  const currentState = navigationStack.pop();
+  
+  if (currentState === 'profile-panel') {
+    closeProfile();
+  } else if (currentState === 'chat-view') {
+    showChatList();
+  }
+}
+
+// Handle browser back button
+window.addEventListener('popstate', (e) => {
+  e.preventDefault();
+  handleBackNavigation();
+});
+
+// Initialize
+history.pushState({ navState: 'initial' }, '', window.location.href);
+renderChatList();
+renderActiveChat();
+renderMessages();
+updateUnreadCount();
+showChatList(); // Start with chat list visible
+</script>
+
+</body>
+</html>
