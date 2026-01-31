@@ -262,7 +262,6 @@
 
     // if no signup data exists
     if (!storedEmail || !storedPassword) {
-        alert("No account found. Please sign up first.");
         return;
     }
 
@@ -272,7 +271,7 @@
         // mark user as logged in
         localStorage.setItem("isLoggedIn", "true");
 
-        alert("Login successful!");
+        
 
         // go to home page
         window.location.href = "home.html";
