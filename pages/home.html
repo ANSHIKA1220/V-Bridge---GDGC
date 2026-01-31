@@ -1,1 +1,93 @@
+mport { ThumbsUp, MessageCircle, Moon, Bell } from "lucide-react";
+const Home = () => {
+  return (
+      <main className="main-content">
+        {/* Top Bar */}
+        <div className="top-bar">
+          <input
+            type="text"
+            placeholder="Search questions, topics, or mentors..."
+          />
+          <div className="icon">
+            <Moon className="icon-pop " />
+            <Bell  className="icon-pop"/>
+            < img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGKP0sx-DE7BqoVJFPBcAnEQRpVLNJGJs_CQ&s"}alt="Alex" className="avatar"></img>
+             </div>
+           </div>
+
+        <div className="content-area">
+          {/* Feed */}
+          <section className="feed">
+            <div className="ask-box">
+            < img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGKP0sx-DE7BqoVJFPBcAnEQRpVLNJGJs_CQ&s"}alt="Alex" className="avatar"></img>
+              <input placeholder="Ask a question to your mentors..." />
+              <button>+</button>
+            </div>
+
+            {/* Post 1 */}
+            <div className="post">
+              <div className="post-meta">
+           <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGKP0sx-DE7BqoVJFPBcAnEQRpVLNJGJs_CQ&s"}alt="Alex" className="AvtarLarge"></img>
+           <div className="header"> 
+             <h4> Alex Johnson</h4> 
+             <p className="category"> Posted 2h ago in <span style={{color:'#2563eb'}} >Computer Science </span> </p>
+              </div>
+              </div>
+              <h3>
+                How do I efficiently implement Dijkstra's algorithm for my
+                graph theory assignment?
+              </h3>
+              <p className="post-text">
+                The best approach is to use a priority queue (Min-Heap) and
+                maintain distances...
+                 </p>
+                 <div className="icon2">
+                  <div className="icon-item">
+                <ThumbsUp  className="icon-pop2" />
+                <span className="icon-count">24</span>
+                </div>
+                <div className="icon-item">
+                 <MessageCircle className="icon-pop2"/>
+                < span className="icon-count">12</span>
+              </div>
+              
+              <div style={{color: "#2563eb"}} className="ShowMore">Show More</div>
+             </div>
+            </div>
+
+            {/* Post 2 */}
+            <div className="post">
+              <div className="post-meta">
+              <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROdxGHGI80UZ-3LIu6sHyLk1TYPl2hvoIGfw&s"} alt="Sarah" className="Avtar"></img>
+              <div className="header">
+              <h4>Sarah Williams</h4>
+                <p className="category"> Posted 5h ago in<span style={{color:'green'}}>Organic Chemistry</span> </p>
+              </div>
+              </div>
+              <h3>
+                Tips for memorizing functional groups for the upcoming midterm?
+              </h3>
+              <p className="post-text">
+                Drawing them repeatedly and using mnemonic devices really helps.
+              </p>
+              <div className="icon2">
+                <div className="icon-item">
+              <ThumbsUp className="icon-pop2"/>
+              <span className="icon-count">56</span>
+              </div>
+              <div className="icon-item">
+              <MessageCircle className="icon-pop2"/>
+              <span className="icon-count">43</span>
+              </div>
+              <div style={{color: "#2563eb"}} className="ShowMore">Show More</div>
+            </div>
+          </div>
+        </section>
+      </div> 
+  </main>
+    
+  );
+};
+
+export default Home;
 
