@@ -250,16 +250,37 @@
 
     <script>
         function handleLogin(event) {
-            event.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            console.log('Login attempt:', { email, password });
-            alert('Login functionality would be implemented here');
-            window.location.href = "home.html";
+    event.preventDefault();
 
-          
-        }
+    // get entered values
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    // get stored values from signup
+    const storedEmail = localStorage.getItem("userEmail");
+    const storedPassword = localStorage.getItem("userPassword");
+
+    // if no signup data exists
+    if (!storedEmail || !storedPassword) {
+        alert("No account found. Please sign up first.");
+        return;
+    }
+
+    // check credentials
+    if (email === storedEmail && password === storedPassword) {
+
+        // mark user as logged in
+        localStorage.setItem("isLoggedIn", "true");
+
+        alert("Login successful!");
+
+        // go to home page
+        window.location.href = "home.html";
+
+    } else {
+        alert("Invalid email or password!");
+    }
+}
 
         function closeModal() {
             console.log('Close button clicked');
