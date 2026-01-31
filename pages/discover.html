@@ -1,66 +1,207 @@
-import mentor1 from  "C:\\Users\\aditi\\Downloads\\mentor1.jpg"
-import mentor2 from "C:\\Users\\aditi\\Downloads\\mentor2.jpg"
-import mentor3 from  "C:\\Users\\aditi\\Downloads\\mentor3.jpg"
-import { Code2, BarChart3, PenTool } from "lucide-react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discover</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      display: flex;
+    }
 
-const Discover = () => {
-  return (
-    <div className="discover-page">
-      {/* Header */}
-      <div className="discover-header">
-        <h1>Discover</h1>
-        <input placeholder="Mentors or opportunities..." />
-     </div>
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background: #ffffff;
+      height: 100vh;
+      padding: 20px;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
-      {/* Top mentors */}
-      <section className="top-Mentors">
-        <div className="section-header">
-          <h3>Top Mentors</h3>
-          <span className="link">View All</span>
-        </div>
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 40px;
+      color: #3b82f6;
+    }
 
-        <div className="mentor-list">
-          <img src={mentor1} className="avatar large" />
-          <img src={mentor2} className="avatar large" />
-          <img src={mentor3} className="avatar large" />
-          <div className="see-more">...</div>
-        </div>
-        </section>
-      
+    .nav-item {
+      padding: 12px 0;
+      cursor: pointer;
+      color: #555;
+      font-size: 15px;
+    }
 
-      {/* Opportunities */}
-      <section className="opportunities">
-        <h3>Opportunities</h3>
+    .nav-item.active {
+      color: #3b82f6;
+      font-weight: bold;
+    }
 
-        <div className="opportunity-grid">
-          <div className="op-card blue">
-            <Code2 className="op-icon" />
-            <span className="tag internship">INTERNSHIP</span>
-            <h4>Software Engineering Intern</h4>
-            <p>at TechFlow</p>
-            <a>Read More →</a>
-          </div>
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+      margin-top: 40px;
+    }
 
-          <div className="op-card dark">
-           <BarChart3 className="op-icon" />
-            <span className="tag fulltime">FULL TIME</span>
-            <h4>Junior Data Analyst</h4>
-            <p>at Global Insights</p>
-            <a>Read More →</a>
-          </div>
+    .profile img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #ddd;
+    }
 
-          <div className="op-card green">
-           <PenTool className="op-icon" />
-            <span className="tag contract">CONTRACT</span>
-            <h4>UI/UX Designer</h4>
-            <p>at Creative Studio</p>
-            <a>Read More →</a>
-          </div>
-        </div>
-      </section>
+    /* Main content */
+    .main {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .discover-header {
+      background: linear-gradient(135deg, #6ca7ff, #4a6dd8);
+      padding: 40px;
+      border-radius: 15px;
+      color: white;
+    }
+
+    .search-bar {
+      margin-top: 15px;
+      background: rgba(255,255,255,0.4);
+      padding: 12px;
+      border-radius: 50px;
+      backdrop-filter: blur(6px);
+      border: none;
+      width: 60%;
+      color: #fff;
+    }
+
+    .top-mentors {
+      display: flex;
+      align-items: center;
+      margin-top: 25px;
+      gap: 20px;
+    }
+
+    .mentor {
+      text-align: center;
+      color: white;
+    }
+
+    .mentor img {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+    }
+
+    /* Cards */
+    .opportunities-section {
+      margin-top: 40px;
+    }
+
+    .cards {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: #fff;
+      flex: 1;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 5px 10px;
+      font-size: 12px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .tag.internship { background: #2ea3ff; }
+    .tag.fulltime { background: #6d28d9; }
+    .tag.contract { background: #f59e0b; }
+
+    .read-more {
+      margin-top: 15px;
+      color: #3b82f6;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <div>
+      <div class="logo">Mentor Link</div>
+      <div class="nav-item">Home</div>
+      <div class="nav-item">DMs</div>
+      <div class="nav-item active">Discover</div>
+      <div class="nav-item">Profile</div>
     </div>
-  );
-};
 
-export default Discover;
+    <div class="profile">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGKP0sx-DE7BqoVJFPBcAnEQRpVLNJGJs_CQ&s"  alt="Alex"/>
+      <div>
+        <strong>Alex Johnson</strong><br />Student
+      </div>
+    </div>
+  </div>
 
+  <div class="main">
+    <div class="discover-header">
+      <h1>Discover</h1>
+      <input class="search-bar" placeholder="Mentors or opportunities..." />
+
+      <div class="top-mentors">
+        <div class="mentor"><img src="" /><div>Dr. Alex</div></div>
+        <div class="mentor"><img src="" /><div>Sarah W.</div></div>
+        <div class="mentor"><img src="" /><div>Marcus C.</div></div>
+        <div class="mentor"><img src="" /><div>Elena R.</div></div>
+      </div>
+    </div>
+
+    <div class="opportunities-section">
+      <h2>Opportunities</h2>
+
+      <div class="cards">
+        <div class="card">
+          <span class="tag internship">INTERNSHIP</span>
+          <h3>Software Engineering Intern at TechFlow</h3>
+          <div class="read-more">Read More →</div>
+        </div>
+
+        <div class="card">
+          <span class="tag fulltime">FULL TIME</span>
+          <h3>Junior Data Analyst at Global Insights</h3>
+          <div class="read-more">Read More →</div>
+        </div>
+
+        <div class="card">
+          <span class="tag contract">CONTRACT</span>
+          <h3>UI/UX Designer at Creative Studio</h3>
+          <div class="read-more">Read More →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // Future JS interactions can go here
+</script>
+
+</body>
+</html>
