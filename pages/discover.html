@@ -1,1 +1,66 @@
+import mentor1 from  "C:\\Users\\aditi\\Downloads\\mentor1.jpg"
+import mentor2 from "C:\\Users\\aditi\\Downloads\\mentor2.jpg"
+import mentor3 from  "C:\\Users\\aditi\\Downloads\\mentor3.jpg"
+import { Code2, BarChart3, PenTool } from "lucide-react";
+
+const Discover = () => {
+  return (
+    <div className="discover-page">
+      {/* Header */}
+      <div className="discover-header">
+        <h1>Discover</h1>
+        <input placeholder="Mentors or opportunities..." />
+     </div>
+
+      {/* Top mentors */}
+      <section className="top-Mentors">
+        <div className="section-header">
+          <h3>Top Mentors</h3>
+          <span className="link">View All</span>
+        </div>
+
+        <div className="mentor-list">
+          <img src={mentor1} className="avatar large" />
+          <img src={mentor2} className="avatar large" />
+          <img src={mentor3} className="avatar large" />
+          <div className="see-more">...</div>
+        </div>
+        </section>
+      
+
+      {/* Opportunities */}
+      <section className="opportunities">
+        <h3>Opportunities</h3>
+
+        <div className="opportunity-grid">
+          <div className="op-card blue">
+            <Code2 className="op-icon" />
+            <span className="tag internship">INTERNSHIP</span>
+            <h4>Software Engineering Intern</h4>
+            <p>at TechFlow</p>
+            <a>Read More →</a>
+          </div>
+
+          <div className="op-card dark">
+           <BarChart3 className="op-icon" />
+            <span className="tag fulltime">FULL TIME</span>
+            <h4>Junior Data Analyst</h4>
+            <p>at Global Insights</p>
+            <a>Read More →</a>
+          </div>
+
+          <div className="op-card green">
+           <PenTool className="op-icon" />
+            <span className="tag contract">CONTRACT</span>
+            <h4>UI/UX Designer</h4>
+            <p>at Creative Studio</p>
+            <a>Read More →</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Discover;
 
