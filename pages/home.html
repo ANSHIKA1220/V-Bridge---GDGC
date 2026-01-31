@@ -91,3 +91,91 @@ const Home = () => {
 
 export default Home;
 
+              <!----Sidebar.tsx---!>
+import { NavLink } from "react-router-dom";
+import { Home, MessageCircle,User,Compass } from "lucide-react";
+const Sidebar: React.FC = () => {
+  return (
+    <div className="app-layout">
+      {/* Sidebar */}
+      <aside className="sidebar">
+        <div className="logo">VConnect</div>
+
+        <div className="user-info">
+          <h3>Hi Alex Johnson</h3>
+          <p>05 unread messages</p>
+        </div>
+
+       <nav className="nav">
+       <NavLink to="/" end className="nav-item" >
+          <Home></Home>
+            <span>Home</span>
+          </NavLink>
+         
+       <NavLink to="/Dm" className="nav-item">
+          <MessageCircle></MessageCircle>
+           <span> DMS</span>
+          </NavLink>
+          
+ <NavLink to="./discover"className="nav-item" >
+          <Compass></Compass>
+           <span> Discover</span>
+          </NavLink>
+          
+    <NavLink to="/profile"className="nav-item" >
+          <User></User>
+           <span> Profile</span>
+          </NavLink>
+           </nav>
+              
+     <div className="sidebarFooter">
+    <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGKP0sx-DE7BqoVJFPBcAnEQRpVLNJGJs_CQ&s"}alt="Alex" className="avatar" />
+    <div>
+      <p className="name">Alex Johnson</p>
+      <span className="role">Student</span>
+    </div>
+  </div>
+  </aside>
+    </div>
+  );
+};
+
+     export default Sidebar;
+             <!----app.tsx(for routing)--!>
+              
+ import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./home";
+import Discover from "./discover";
+import Sidebar from "./Sidebar";
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <div className="app-layout">
+        <Sidebar />
+
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/discover" element={<Discover />} />
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
+  );
+};
+
+export default App;
+              
+           <!---main.tsx-->
+              
+ import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./app";
+import "./index.css";
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
